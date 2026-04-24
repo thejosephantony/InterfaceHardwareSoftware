@@ -61,13 +61,6 @@ Para a análise dos projetos, utilizamos o seguinte conjunto de ferramentas prof
 
 ---
 
-## 📖 Referências
-* **Bryant, R. E.; O'Hallaron, D. R.** *Computer Systems: A Programmer's Perspective*.
-* **Stallings, W.** *Arquitetura e Organização de Computadores*.
-* Algoritmos e materiais fornecidos pelo **Prof. André Backes**.
-
----
-
 ## 🚀 Como Explorar
 
 ```bash
