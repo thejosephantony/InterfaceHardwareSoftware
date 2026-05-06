@@ -8,7 +8,7 @@ fmt_hex:    .asciz "%x"
 fmt_dec:    .asciz "%d"
 fmt_tripla: .asciz "%x %x %x"
 fmt_char:   .asciz "%c"
-fmt_taxa:   .asciz "[%d%%]\n"
+fmt_taxa:   .asciz "[%d.%02d%%]\n"
 err_msg:    .asciz "Error\n"
 
 .section .bss
@@ -325,7 +325,7 @@ prox_pinta:
 
 renderiza:
     movsxd rax, dword ptr [rip+v_ntup]
-    imul rax, 300
+    imul rax, 30000
 
     movsxd rcx, dword ptr [rip+v_larg]
     movsxd rdx, dword ptr [rip+v_alt]
@@ -334,12 +334,24 @@ renderiza:
     test rcx, rcx
     jz prox_img
 
+    mov rbx, rcx
+    mov rdx, rbx
+    shr rdx, 1
+    add rax, rdx
+
     cqo
-    idiv rcx
+    idiv rbx
+
+    mov rbx, 100
+    cqo
+    idiv rbx
+
+    mov r8d, edx
 
     mov rdi, [rip+f_out]
     lea rsi, [rip+fmt_taxa]
     mov edx, eax
+    mov ecx, r8d
     xor eax, eax
     call fprintf
 
