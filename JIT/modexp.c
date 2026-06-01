@@ -116,6 +116,152 @@ const uint64_t interpret(uint8_t* code, uint32_t n) {
 	return value;
 }
 
+const uint64_ interpretador(uint8_ * code, uint32_ n){   //uint8_* code recebe o vetor com o bytecode, uint32_ numero de bytes
+	uint32_t pc = 0;  // contador do programa
+	uint8_t eq = 0;   // igual
+	uint8_t gt = 0;	  // maior
+	uint8_t lt = 0;  // menor
+	// eq, gt, lt são flags de comparação, guardam o resultado da última comparação
+
+	uint64_t retorno = 0;  // guardaa o valor final calculado
+	
+    while(pc < n) {
+        uint8_t opcode = code[pc];
+
+        switch(opcode) {
+            case 0x00: { // set64
+                pc++;
+
+                uint8_t var = code[pc];
+                pc++;
+
+                uint64_t valor = *(uint64_t*)(&code[pc]);
+                pc += 8;
+
+                v64[var] = valor;
+
+                break;
+            }
+
+            case 0x01: { // set128
+                pc++;
+
+                uint8_t var = code[pc];
+                pc++;
+
+                __uint128_t valor = *(__uint128_t*)(&code[pc]);
+                pc += 16;
+
+                v128[var] = valor;
+
+                break;
+            }
+
+            case 0x02: { // cmp64
+                pc++;
+
+                uint8_t var1 = code[pc];
+                pc++;
+
+                uint8_t var2 = code[pc];
+                pc++;
+
+                eq = v64[var1] == v64[var2];
+                gt = v64[var1] > v64[var2];
+                lt = v64[var1] < v64[var2];
+
+                break;
+            }
+
+            case 0x03: { // bge
+                pc++;
+
+                int32_t deslocamento = *(int32_t*)(&code[pc]);
+
+                if(eq || gt) {
+                    pc += deslocamento;
+                }
+
+                pc += 4;
+
+                break;
+            }
+
+            case 0x04: { // bun
+                pc++;
+
+                int32_t deslocamento = *(int32_t*)(&code[pc]);
+
+                pc += deslocamento + 4;
+
+                break;
+            }
+
+            case 0x05: { // mul128
+                pc++;
+
+                uint8_t destino = code[pc];
+                pc++;
+
+                uint8_t origem128 = code[pc];
+                pc++;
+
+                uint8_t origem64 = code[pc];
+                pc++;
+
+                v128[destino] = v128[origem128] * v64[origem64];
+
+                break;
+            }
+
+            case 0x06: { // mod128
+                pc++;
+
+                uint8_t destino = code[pc];
+                pc++;
+
+                uint8_t origem128 = code[pc];
+                pc++;
+
+                uint8_t origem64 = code[pc];
+                pc++;
+
+                v128[destino] = v128[origem128] % v64[origem64];
+
+                break;
+            }
+
+            case 0x07: { // inc
+                pc++;
+
+                uint8_t var = code[pc];
+                pc++;
+
+                v64[var]++;
+
+                break;
+            }
+
+            case 0x08: { // return
+                pc++;
+
+                uint8_t var = code[pc];
+                pc++;
+
+                retorno = v128[var];
+
+                break;
+            }
+
+            default:
+                printf("Instrucao invalida em pc = %u: 0x%02X\n", pc, opcode);
+                abort();
+        }
+    }
+
+    return retorno;
+}
+
 uint8_t code[] = {
 	0x55,                               // push rbp
 	0x48, 0x89, 0xE5,                   // mov rbp, rsp
