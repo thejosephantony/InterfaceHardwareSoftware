@@ -116,16 +116,22 @@ const uint64_t interpret(uint8_t* code, uint32_t n) {
 	return value;
 }
 
-const uint64_ interpretador(uint8_ * code, uint32_ n){   //uint8_* code recebe o vetor com o bytecode, uint32_ numero de bytes
-	uint32_t pc = 0;  // contador do programa
-	uint8_t eq = 0;   // igual
-	uint8_t gt = 0;	  // maior
-	uint8_t lt = 0;  // menor
-	// eq, gt, lt são flags de comparação, guardam o resultado da última comparação
+const uint64_t interpretador(uint8_t* code, uint32_t n) {
+    // pc = program counter, ou contador de programa.
+    // Ele indica qual byte do bytecode está sendo executado.
+    uint32_t pc = 0;
 
-	uint64_t retorno = 0;  // guardaa o valor final calculado
-	
+    // Flags de comparação.
+    // Guardam o resultado da última instrução cmp64.
+    uint8_t eq = 0; // equal: igual
+    uint8_t gt = 0; // greater than: maior
+    uint8_t lt = 0; // less than: menor
+
+    // Guarda o valor final calculado pelo programa interpretado.
+    uint64_t retorno = 0;
+
     while(pc < n) {
+        // Lê o opcode da instrução atual.
         uint8_t opcode = code[pc];
 
         switch(opcode) {
