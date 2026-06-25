@@ -1,121 +1,91 @@
-# Interface Hardware e Software (IHS)
+````md
+<div align="center">
 
-![Assembly](https://img.shields.io/badge/Assembly-AMD64-blue?style=for-the-badge)
+# 🧠 Interface Hardware e Software
+
+### Estudos práticos sobre a ponte entre **programas**, **sistema operacional**, **compiladores** e **hardware**
+
+<br>
+
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-Ubuntu-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![GCC](https://img.shields.io/badge/GCC-Compilador-663399?style=for-the-badge&logo=gnu&logoColor=white)
-![LLVM](https://img.shields.io/badge/LLVM-IR-262D3A?style=for-the-badge&logo=llvm&logoColor=white)
+![Assembly](https://img.shields.io/badge/Assembly%20AMD64-6E4C13?style=for-the-badge&logo=assemblyscript&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![GCC](https://img.shields.io/badge/GCC-333333?style=for-the-badge&logo=gnu&logoColor=white)
+![LLVM](https://img.shields.io/badge/LLVM-262D3A?style=for-the-badge&logo=llvm&logoColor=white)
+![Makefile](https://img.shields.io/badge/Makefile-427819?style=for-the-badge&logo=gnu&logoColor=white)
 
-Repositório acadêmico da disciplina **Interface Hardware e Software**, voltado ao estudo da relação entre programas, sistema operacional, compiladores e hardware. O objetivo é compreender como um código escrito em linguagem de alto nível é traduzido, carregado, executado e analisado em uma arquitetura real.
+<br>
 
-O foco principal está em **programação de baixo nível**, **Assembly AMD64**, **binários ELF**, **chamadas de sistema**, **registradores**, **memória**, **compilação** e **análise de desempenho**.
+[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue?style=flat-square)](#)
+[![Disciplina](https://img.shields.io/badge/disciplina-Interface%20Hardware--Software-purple?style=flat-square)](#)
+[![Plataforma](https://img.shields.io/badge/plataforma-GNU%2FLinux-orange?style=flat-square)](#)
+[![Arquitetura](https://img.shields.io/badge/arquitetura-x86--64%20%2F%20AMD64-red?style=flat-square)](#)
 
----
+<br>
 
-## 🎯 Objetivo da disciplina
+> Repositório acadêmico com implementações, experimentos e projetos voltados ao estudo de programação de baixo nível, Assembly AMD64, binários ELF, chamadas de sistema, compilação, profiling e interação entre software e hardware.
 
-A disciplina de Interface Hardware e Software busca aproximar dois níveis fundamentais da computação:
-
-- o **software**, representado por programas, linguagens, compiladores e sistemas operacionais;
-- o **hardware**, representado por processadores, registradores, memória, instruções de máquina e dispositivos.
-
-Neste repositório, os estudos são organizados em exemplos práticos que ajudam a entender o caminho entre o código-fonte e a execução no processador.
-
----
-
-## 🧠 Conteúdos estudados
-
-### Arquitetura e baixo nível
-
-- Arquitetura **x86-64 / AMD64**;
-- registradores de uso geral, como `rax`, `rbx`, `rcx`, `rdx`, `rdi`, `rsi`, entre outros;
-- instruções básicas de movimentação e aritmética, como `mov`, `add`, `sub`, `imul`, `div` e `xor`;
-- pilha de execução, chamadas de função e convenções de chamada;
-- organização da memória em seções como `.text`, `.data` e `.bss`.
-
-### Assembly e sistema operacional
-
-- escrita de programas simples em Assembly;
-- uso de **syscalls** no Linux;
-- finalização de programas com a syscall `exit`;
-- manipulação direta de registradores;
-- diferença entre código Assembly, código de máquina e executável.
-
-### Compilação e representação intermediária
-
-- compilação de programas em C com `gcc` e `clang`;
-- geração e análise de código Assembly;
-- geração de **LLVM IR**;
-- análise do processo de tradução entre código-fonte, representação intermediária, Assembly e binário.
-
-### Análise de binários
-
-- estrutura de arquivos executáveis **ELF**;
-- uso de `objdump` para inspecionar executáveis;
-- leitura de trechos de disassembly;
-- comparação entre código C, Assembly gerado e instruções executadas.
-
-### Profiling e desempenho
-
-- comparação entre implementações iterativas e recursivas;
-- uso de `gprof` para análise de chamadas de função;
-- uso de `perf` para análise de desempenho em nível mais próximo do hardware;
-- observação de tempo de execução, chamadas, instruções e possíveis gargalos.
+</div>
 
 ---
 
-## 📂 O que este repositório contém
+## 📌 Visão geral
 
-Este repositório reúne atividades e experimentos relacionados a:
+Este repositório reúne atividades da disciplina **Interface Hardware e Software**, com foco em entender o que acontece entre escrever um programa e vê-lo executar no processador.
 
-| Tipo de conteúdo | Descrição |
-| :--- | :--- |
-| Exemplos em Assembly AMD64 | Programas simples para praticar instruções, registradores e syscalls. |
-| Programas em C | Códigos usados para observar compilação, otimização e desempenho. |
-| Saídas de ferramentas | Resultados de `objdump`, `gprof`, `perf` e outras ferramentas de análise. |
-| LLVM IR | Representações intermediárias geradas a partir de programas em C. |
-| Estudos de desempenho | Comparações entre diferentes formas de implementação, como funções iterativas e recursivas. |
+A proposta é estudar, de forma prática, o caminho:
 
----
+```mermaid
+flowchart LR
+    A[Código-fonte em C] --> B[Compilador]
+    B --> C[Assembly]
+    C --> D[Arquivo objeto]
+    D --> E[Executável ELF]
+    E --> F[Sistema Operacional]
+    F --> G[Hardware / CPU]
+````
 
-## 🛠️ Ferramentas utilizadas
-
-| Ferramenta | Finalidade |
-| :--- | :--- |
-| `gcc` | Compilar programas em C e Assembly no ambiente GNU/Linux. |
-| `clang` | Compilar C e gerar LLVM IR. |
-| `nasm` | Montar programas Assembly com sintaxe Intel/NASM. |
-| `ld` | Linkar arquivos objeto gerados pelo assembler. |
-| `objdump` | Inspecionar e desmontar executáveis. |
-| `gdb` | Depurar programas e observar registradores/memória. |
-| `gprof` | Gerar relatórios de profiling baseados em instrumentação. |
-| `perf` | Medir desempenho usando eventos do sistema e do processador. |
-| `strace` | Observar chamadas de sistema realizadas por um programa. |
+Ao longo do repositório, são explorados exemplos em **C**, **Assembly AMD64**, ferramentas GNU/Linux, análise de binários, geração de código intermediário, profiling e módulos de kernel.
 
 ---
 
-## 💻 Ambiente de desenvolvimento
+## 🎯 Objetivos de aprendizagem
 
-Os códigos foram desenvolvidos e testados em ambiente **Linux Ubuntu**, incluindo uso via **WSL no Windows**.
+Ao estudar este repositório, o objetivo é desenvolver uma visão mais profunda sobre:
 
-Ambiente recomendado:
-
-- Ubuntu ou outra distribuição Linux;
-- terminal Bash;
-- `gcc`, `clang`, `nasm`, `binutils`, `gdb`, `perf` e `gprof` instalados.
-
-Para instalar parte das ferramentas no Ubuntu:
-
-```bash
-sudo apt update
-sudo apt install build-essential nasm clang llvm binutils gdb linux-tools-common linux-tools-generic
-```
-
-> Observação: em ambientes WSL, algumas funções do `perf` podem ter limitações dependendo da configuração do sistema.
+| Área                  | O que é estudado                                                         |
+| --------------------- | ------------------------------------------------------------------------ |
+| 🧩 **Compilação**     | Como C é transformado em Assembly, objeto e executável.                  |
+| ⚙️ **Assembly AMD64** | Registradores, instruções, syscalls, pilha e fluxo de execução.          |
+| 🧠 **Arquitetura**    | Relação entre CPU, memória, instruções e sistema operacional.            |
+| 📦 **Binários ELF**   | Estrutura de executáveis Linux e análise com ferramentas de baixo nível. |
+| 🚀 **Desempenho**     | Profiling, medição de tempo, eventos de CPU e otimização.                |
+| 🐧 **Linux e Kernel** | Chamadas de sistema, módulos de kernel e execução privilegiada.          |
 
 ---
 
-## 🚀 Como clonar o repositório
+## 🗂️ Estrutura do repositório
+
+| Diretório                          | Descrição                                                                       |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| `Assembly (AMD64)/`                | Exemplos em Assembly AMD64 para praticar instruções, registradores e syscalls.  |
+| `Aulas/`                           | Materiais de apoio da disciplina.                                               |
+| `Avaliação de Desempenho (Perf)/`  | Experimentos de medição de desempenho com `perf`.                               |
+| `Avaliação de Desempenho (gprof)/` | Experimentos de profiling com `gprof`.                                          |
+| `Implementação 1/`                 | Atividade prática envolvendo C, Assembly, objeto e executável.                  |
+| `Implementação 2/`                 | Atividade prática com foco em análise, compilação e execução.                   |
+| `Implementação 3/`                 | Atividade prática complementar da disciplina.                                   |
+| `JIT/`                             | Experimentos com geração/otimização de código e exponenciação modular.          |
+| `MOD/`                             | Exemplos de módulos de kernel Linux e uso de `Makefile`.                        |
+| `Projeto 1/`                       | Projeto em Assembly relacionado à conversão/decodificação de imagem para ASCII. |
+| `Projeto 2/`                       | Projeto em C voltado a busca exaustiva e análise de desempenho.                 |
+| `Projeto 3/PicoQuickProcessor/`    | Implementações e versões otimizadas do PicoQuickProcessor.                      |
+| `VP1/`                             | Experimento com C, Assembly, linker script e execução controlada.               |
+| `VP2/`                             | Continuação de experimentos com C, Assembly, syscalls e linker script.          |
+
+---
+
+## 🚀 Como clonar
 
 ```bash
 git clone https://github.com/thejosephantony/InterfaceHardwareSoftware.git
@@ -124,42 +94,28 @@ cd InterfaceHardwareSoftware
 
 ---
 
-## ▶️ Como executar exemplos
+## ▶️ Como compilar e executar
 
-### 1. Compilando um programa em C
+### Compilar um programa em C
 
 ```bash
-gcc -Wall -g arquivo.c -o programa
+gcc -Wall -Wextra -g arquivo.c -o programa
 ./programa
 ```
 
-Com profiling usando `gprof`:
+### Gerar Assembly a partir de C
 
 ```bash
-gcc -Wall -g -pg arquivo.c -o programa
-./programa
-gprof ./programa gmon.out > resultado.txt
+gcc -S -masm=intel arquivo.c -o arquivo.s
 ```
 
-### 2. Gerando LLVM IR com Clang
+### Gerar LLVM IR com Clang
 
 ```bash
 clang -S -emit-llvm arquivo.c -o arquivo.ll
 ```
 
-### 3. Inspecionando um executável com objdump
-
-```bash
-objdump -d -M intel programa
-```
-
-Para desmontar todas as seções do binário:
-
-```bash
-objdump -D -z -M intel programa
-```
-
-### 4. Montando e executando Assembly com NASM
+### Montar e executar Assembly com NASM
 
 ```bash
 nasm -f elf64 arquivo.asm -o arquivo.o
@@ -167,110 +123,95 @@ ld arquivo.o -o programa
 ./programa
 ```
 
-Para visualizar o código de saída do programa:
+### Inspecionar um executável
 
 ```bash
-echo $?
-```
-
-### 5. Compilando Assembly no formato GNU AS
-
-Caso o arquivo use sintaxe compatível com o `gcc`/GNU assembler:
-
-```bash
-gcc -no-pie arquivo.s -o programa
-./programa
+objdump -d -M intel programa
+readelf -h programa
+readelf -S programa
+readelf -s programa
 ```
 
 ---
 
-## 🔎 Exemplo conceitual: syscall `exit`
+## 🧪 Projetos principais
 
-Um programa Assembly mínimo em Linux pode encerrar sua execução usando a syscall `exit`:
+### 🖼️ Projeto 1 — Image to ASCII em Assembly
 
-```asm
-section .text
+Projeto voltado à manipulação de dados em baixo nível e produção de saída textual a partir de uma entrada estruturada.
 
-global _start
+### 🔐 Projeto 2 — Busca exaustiva e desempenho
 
-_start:
-    mov rax, 60    ; número da syscall exit no Linux x86-64
-    mov rdi, 0     ; código de saída
-    syscall        ; chamada ao kernel
-```
+Projeto em C com foco em busca exaustiva, análise de custo computacional e avaliação de desempenho.
 
-Nesse exemplo:
+### ⚡ Projeto 3 — PicoQuickProcessor
 
-- `rax` recebe o número da chamada de sistema;
-- `rdi` recebe o primeiro argumento da syscall;
-- `syscall` transfere o controle para o kernel.
+Projeto com múltiplas versões do **PicoQuickProcessor**, incluindo implementações base, versões otimizadas e experimentos relacionados a desempenho.
+
+### 🐧 MOD — Módulos de kernel Linux
+
+Diretório com exemplos de módulos de kernel, incluindo `hello_world`, parâmetros de módulo, threads de kernel e produtor/consumidor.
 
 ---
 
-## 📊 Exemplos de análise de desempenho
+## 🧰 Ferramentas utilizadas
 
-Para comparar diferentes implementações, como fatorial iterativo e fatorial recursivo, podem ser usadas ferramentas como `gprof` e `perf`.
-
-Exemplo com `perf`:
-
-```bash
-perf stat ./programa
-```
-
-Exemplo com `time`:
-
-```bash
-time ./programa
-```
-
-Essas ferramentas ajudam a observar diferenças entre:
-
-- tempo real de execução;
-- tempo gasto em modo usuário;
-- tempo gasto em chamadas de sistema;
-- quantidade de chamadas de função;
-- impacto de otimizações do compilador.
+| Ferramenta | Finalidade                                                   |
+| ---------- | ------------------------------------------------------------ |
+| `gcc`      | Compilar programas em C e Assembly.                          |
+| `clang`    | Compilar C e gerar LLVM IR.                                  |
+| `nasm`     | Montar programas Assembly com sintaxe Intel/NASM.            |
+| `ld`       | Linkar arquivos objeto e gerar executáveis.                  |
+| `make`     | Automatizar processos de compilação.                         |
+| `objdump`  | Desmontar e inspecionar executáveis.                         |
+| `readelf`  | Inspecionar cabeçalhos, seções e símbolos ELF.               |
+| `gdb`      | Depurar programas e observar registradores, memória e fluxo. |
+| `gprof`    | Gerar relatórios de profiling por instrumentação.            |
+| `perf`     | Medir eventos de desempenho em nível de sistema/processador. |
+| `time`     | Medir tempo de execução.                                     |
+| `strace`   | Observar chamadas de sistema realizadas por um programa.     |
 
 ---
 
-## 📌 Conceitos importantes
+## 🔮 Melhorias futuras
 
-Durante os estudos, alguns conceitos aparecem com frequência:
-
-- **Assembly**: representação textual de instruções de máquina;
-- **código de máquina**: instruções binárias executadas pelo processador;
-- **ELF**: formato comum de executáveis em sistemas Linux;
-- **ABI**: conjunto de regras para chamadas de função, passagem de parâmetros e uso da pilha;
-- **syscall**: mecanismo usado por programas para solicitar serviços ao kernel;
-- **profiling**: análise do comportamento de execução de um programa;
-- **LLVM IR**: representação intermediária usada pelo ecossistema LLVM.
-
----
-
-## 📚 Aprendizados principais
-
-Este repositório reforça a ideia de que entender a interface entre hardware e software permite:
-
-- escrever programas mais eficientes;
-- compreender melhor o funcionamento de compiladores;
-- interpretar mensagens e saídas de ferramentas de baixo nível;
-- analisar binários e instruções geradas;
-- entender a relação entre código, memória, processador e sistema operacional;
-- desenvolver uma base mais sólida para sistemas operacionais, arquitetura de computadores, compiladores e segurança.
+* [ ] Criar um `README.md` específico em cada projeto.
+* [ ] Padronizar nomes de arquivos e diretórios.
+* [ ] Adicionar `Makefile` em todas as atividades executáveis.
+* [ ] Criar scripts de execução e teste.
+* [ ] Separar arquivos-fonte de arquivos gerados.
+* [ ] Adicionar um `.gitignore` mais completo.
+* [ ] Documentar entradas, saídas e comandos de cada atividade.
+* [ ] Adicionar diagramas sobre compilação, linking e execução.
+* [ ] Criar relatórios comparativos de desempenho.
+* [ ] Configurar GitHub Actions para validar builds em C.
 
 ---
 
-## 🧩 Possíveis melhorias futuras
+## ⚠️ Aviso acadêmico
 
-- Adicionar um `Makefile` para automatizar a compilação dos exemplos;
-- separar os códigos por temas ou aulas;
-- incluir comentários adicionais nos arquivos Assembly;
-- documentar comandos usados em cada atividade;
-- adicionar exemplos com entrada e saída esperadas;
-- incluir relatórios de profiling mais organizados.
+Este repositório possui finalidade **acadêmica e educacional**.
+
+Os conteúdos relacionados a engenharia reversa, busca exaustiva, análise de binários, profiling, JIT e módulos de kernel devem ser usados apenas em ambiente próprio, controlado e autorizado.
+
+Não utilize os códigos, ideias ou técnicas deste repositório para acesso indevido, violação de sistemas, quebra de credenciais reais, exploração de terceiros ou qualquer atividade não autorizada.
 
 ---
 
 ## 👨‍💻 Autor
 
 Desenvolvido por **Joseph Antony** como parte dos estudos da disciplina **Interface Hardware e Software**.
+
+<div align="center">
+
+<br>
+
+**Interface Hardware e Software**
+*C, Assembly, Linux, Compiladores, Binários ELF e Baixo Nível*
+
+<br>
+
+⬆️ [Voltar ao topo](#-interface-hardware-e-software)
+
+</div>
+```
